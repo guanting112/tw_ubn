@@ -5,19 +5,19 @@ require_relative "lib/tw_ubn/version"
 Gem::Specification.new do |spec|
   spec.name          = "tw_ubn"
   spec.version       = TwUbn::VERSION
-  spec.authors       = ["Guanting Chen ( @Elf )"]
+  spec.authors       = ["Guanting Chen"]
   spec.email         = nil
 
-  spec.summary       = "Write a short summary, because RubyGems requires one."
-  spec.description   = "Write a longer description or delete this line."
-  # spec.homepage      = "Put your gem's website or public repo URL here."
+  spec.summary       = "TwUbn 台灣公司統一編號驗證器 (Taiwan unified business number validator)"
+  spec.description   = "方便您在 ruby 校驗，台灣公司統一編號資料。(支援財政部2021版6月規則更新)"
+  spec.homepage      = "https://github.com/guanting112/tw_ubn"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.5.0"
 
   # spec.metadata["allowed_push_host"] = "Set to your gem server 'https://example.com'"
 
-  # spec.metadata["homepage_uri"] = spec.homepage
-  # spec.metadata["source_code_uri"] = "Put your gem's public repo URL here."
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = spec.homepage
   # spec.metadata["changelog_uri"] = "Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
