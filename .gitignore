@@ -7,3 +7,4 @@
 /spec/reports/
 /tmp/
 /test/fixtures/files/companies_1m.csv
+/Gemfile.lock
