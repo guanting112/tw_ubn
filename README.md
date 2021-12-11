@@ -1,43 +1,70 @@
-# TwUbn
+# Taiwan UBN Validator (2021) 
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tw_ubn`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/tw_ubn.svg)](https://badge.fury.io/rb/tw_ubn)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2e20efaaac6115c6df87/maintainability)](https://codeclimate.com/github/guanting112/tw_ubn/maintainability)
 
-TODO: Delete this and the text above, and describe your gem
+![example workflow](https://github.com/guanting112/tw_ubn/actions/workflows/main.yml/badge.svg)
 
-## Installation
+此為針對 台灣營利事業統一編號 (UBN) 所開發的驗證套件。
 
-Add this line to your application's Gemfile:
+您可以使用它進行驗證，確認使用者提供的公司統一編號是否有效。
+
+* 本套件適用於電商平台發票資料、企業相關表單欄位 輔助驗證。
+* 可減少因消費者統編填錯，與客服溝通/重開的來往成本。
+* 已經過大量現實資料驗證，另有搭配 150 萬筆商工行政資料確定校對方式正確。
+* 與 財政部財資中心 2021年6月公告的新驗證邏輯同步 ( 因應 2024 年公司統一編號用盡之問題 )
+
+驗證之規則與細節參考，皆來自台灣財政部財政資訊中心之公告 「 [營利事業統一編號檢查碼邏輯修正說明][fia_rule] 」 
+
+## Installation / 安裝方式
+
+via Rubygems
+
+```shell
+gem install tw_ubn
+```
+
+In your Gemfile:
 
 ```ruby
 gem 'tw_ubn'
 ```
 
-And then execute:
+## Usage / 如何使用
 
-    $ bundle install
+使用很簡單，僅需要呼叫 TwUbn::Validator.call 即可確認是否正確
 
-Or install it yourself as:
+```ruby
+TwUbn::Validator.call("8碼公司統編")
+```
 
-    $ gem install tw_ubn
+```ruby
+# 有效的公司統一編號
+TwUbn::Validator.call("22099131") # true
+TwUbn::Validator.call("47217677") # true
+TwUbn::Validator.call("22822281") # true
 
-## Usage
+# 錯誤的公司統編
+TwUbn::Validator.call("22822280") # false
+TwUbn::Validator.call("47217977") # false
+TwUbn::Validator.call("88123") # false
+TwUbn::Validator.call("11099131") # false
+```
 
-TODO: Write usage instructions here
+在 Ruby on Rails 內，您也可以將 TwUbn::Validator 導入到自建的 validator 內使用。
 
-## Development
+https://api.rubyonrails.org/classes/ActiveModel/Validator.html
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tw_ubn. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/tw_ubn/blob/master/CODE_OF_CONDUCT.md).
+```ruby
+class TaxDataValidator < ActiveModel::Validator
+  def validate(record)
+    if !TwUbn::Validator.call(record.tax_number)
+      record.errors.add(:tax_number, '統一編號格式不正確。')
+    end
+  end
+end
+```
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the TwUbn project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/tw_ubn/blob/master/CODE_OF_CONDUCT.md).
