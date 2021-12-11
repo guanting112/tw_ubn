@@ -9,6 +9,8 @@
 
 您可以使用它進行驗證，確認使用者提供的公司統一編號是否有效。
 
+![emoji](https://i.imgur.com/cawNbf4.png)
+
 * 本套件適用於電商平台發票資料、企業相關表單欄位 輔助驗證。
 * 可減少因消費者統編填錯，與客服溝通/重開的來往成本。
 * 已經過大量現實資料驗證，另有搭配 150 萬筆商工行政資料確定校對方式正確。
@@ -35,11 +37,15 @@ gem 'tw_ubn'
 使用很簡單，僅需要呼叫 TwUbn::Validator.call 即可確認是否正確
 
 ```ruby
+require 'tw_ubn'
+
 TwUbn::Validator.call("8碼公司統編")
 ```
 
 ```ruby
-# 有效的公司統一編號
+require 'tw_ubn'
+
+# 有效的
 TwUbn::Validator.call("22099131") # true
 TwUbn::Validator.call("47217677") # true
 TwUbn::Validator.call("22822281") # true
