@@ -1,6 +1,6 @@
 # Taiwan UBN Validator (2021) 
 
-[![Gem Version](https://badge.fury.io/rb/tw_ubn.svg)](https://badge.fury.io/rb/tw_ubn)
+[![Gem Version](https://badge.fury.io/rb/tw_ubn.svg?)](https://badge.fury.io/rb/tw_ubn)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2e20efaaac6115c6df87/maintainability)](https://codeclimate.com/github/guanting112/tw_ubn/maintainability)
 ![example workflow](https://github.com/guanting112/tw_ubn/actions/workflows/main.yml/badge.svg)
 
@@ -61,6 +61,7 @@ TwUbn::Validator.call("11099131") # false
 https://api.rubyonrails.org/classes/ActiveModel/Validator.html
 
 ```ruby
+# example
 class TaxDataValidator < ActiveModel::Validator
   def validate(record)
     if !TwUbn::Validator.call(record.tax_number)
@@ -73,3 +74,5 @@ end
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[fia_rule]: https://www.fia.gov.tw/singlehtml/6?cntId=aaa97a9dcf2649d5bdd317f554e24f75
