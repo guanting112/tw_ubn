@@ -1,4 +1,4 @@
-# Taiwan UBN Validator (2021) 
+# Taiwan UBN Validator 台灣公司統一編號驗證
 
 [![Gem Version](https://badge.fury.io/rb/tw_ubn.svg?)](https://badge.fury.io/rb/tw_ubn)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2e20efaaac6115c6df87/maintainability)](https://codeclimate.com/github/guanting112/tw_ubn/maintainability)
@@ -9,8 +9,8 @@
 您可以使用它進行驗證，確認使用者提供的公司統一編號是否有效。
 
 * 本套件適用於電商平台發票資料、企業相關表單欄位 輔助驗證。
-* 可減少因消費者統編填錯，與客服溝通/重開的來往成本。
-* 已經過大量現實資料驗證，另有搭配 150 萬筆商工行政資料確定校對方式正確。
+* 可減少因消費者/買受人統編填錯，與客服溝通、重開來往成本。
+* 已經過大量現實資料驗證，另搭配 150 萬筆商工行政資料測試確定無誤判之狀況。
 * 與 財政部財資中心 2021年6月公告的新驗證邏輯同步 ( 因應 2024 年公司統一編號用盡之問題 )
 
 ![tw_ubn](https://i.imgur.com/cawNbf4.png)
@@ -44,12 +44,12 @@ TwUbn::Validator.call("8碼公司統編")
 ```ruby
 require 'tw_ubn'
 
-# 有效的
+# ✔ 有效的
 TwUbn::Validator.call("22099131") # true
 TwUbn::Validator.call("47217677") # true
 TwUbn::Validator.call("22822281") # true
 
-# 錯誤的公司統編
+# ✘ 有問題的統編
 TwUbn::Validator.call("22822280") # false
 TwUbn::Validator.call("47217977") # false
 TwUbn::Validator.call("88123") # false
@@ -61,7 +61,7 @@ TwUbn::Validator.call("11099131") # false
 https://api.rubyonrails.org/classes/ActiveModel/Validator.html
 
 ```ruby
-# example
+# Example
 class TaxDataValidator < ActiveModel::Validator
   def validate(record)
     if !TwUbn::Validator.call(record.tax_number)
